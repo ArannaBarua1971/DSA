@@ -1,0 +1,1 @@
+{"name":"Local: program","url":"c:\\Users\\USER\\Desktop\\WEB\\c\\program.c","tests":[{"id":1671610305745,"input":"5\n4 3 5 7 3\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\USER\\Desktop\\WEB\\c\\program.c","group":"local","local":true}
