@@ -7,20 +7,20 @@ public:
     linkedList *next;
     linkedList(int x);
 };
-
+ 
 linkedList::linkedList(int x)
 {
     data = x;
     next = NULL;
 }
-
+ 
 void insert_front(linkedList *tail, int x)
 {
     linkedList *temp = new linkedList(x);
     temp->next = tail->next;
     tail->next = temp;
 }
-
+ 
 void insert_back(linkedList *&tail, int x)
 {
     linkedList *temp = new linkedList(x);
@@ -28,7 +28,7 @@ void insert_back(linkedList *&tail, int x)
     tail->next = temp;
     tail = temp;
 }
-
+ 
 int Size(linkedList *tail)
 {
     int value = tail->data;
@@ -40,7 +40,7 @@ int Size(linkedList *tail)
     } while (tail->data != value);
     return count;
 }
-
+ 
 void insert_anywhere(linkedList *&tail, int idx, int x)
 {
     int total = Size(tail) + 1;
@@ -63,7 +63,7 @@ void insert_anywhere(linkedList *&tail, int idx, int x)
         }
     }
 }
-
+ 
 void deletation(linkedList *&tail, int idx)
 {
     int total = Size(tail);
@@ -98,16 +98,16 @@ void print(linkedList *tail)
 }
 int main()
 {
-
+ 
     linkedList a(45);
     linkedList *tail = &a;
     tail->next = tail;
-
+ 
     insert_front(tail, 46);
     insert_front(tail, 67);
     insert_back(tail, 78);
     insert_anywhere(tail, 5, 99);
-
+ 
     deletation(tail,2);
     deletation(tail,4);
     print(tail);
