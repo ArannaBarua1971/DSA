@@ -1,7 +1,7 @@
 #include <stdio.h>
 int num[200];
 
-void sorted(int a, int b, int c, int d)
+void merge(int a, int b, int c, int d)
 {
     int temp[d + 1];
     int i = 0;
@@ -33,7 +33,7 @@ void mergeSort(int left, int right)
     mergeSort(left, mid);
     mergeSort(mid + 1, right);
 
-    sorted(left, mid, mid + 1, right);
+    merge(left, mid, mid + 1, right);
 }
 
 int main()
