@@ -4,6 +4,14 @@
         "PROGRAM.C": "cpp",
         "iostream": "cpp",
         "valarray": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp"
     }
 }
