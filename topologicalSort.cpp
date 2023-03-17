@@ -1,20 +1,16 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 using namespace std;
 
-#include <bits/stdc++.h> 
-
-
-void dfs(int node,unordered_map<int,bool> &visited,unordered_map<int,list<int>> &adj,stack<int> &st){
+void dfs(int node,vector<int> &visited,unordered_map<int,list<int>> &adj,stack<int> &st){
 
     visited[node]=true;
-    stack<int> st;
 
     for(auto x:adj[node]){
         if(!visited[x]){
             dfs(x,visited,adj,st);
         }
     }
-    stack.push(node);
+    st.push(node);
     return;
 
 }
@@ -30,7 +26,7 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
         adj[u].push_back(v);
     }
 
-    unordered_map<int,bool> visited;
+    vector<int> visited(v);
     stack<int> st;
     vector<int> ans;
 
@@ -41,10 +37,10 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
     }
 
     while(v--){
-        ans.push(st.top());
+        ans.push_back(st.top());
         st.pop();
     } 
-
+    // for(auto x:ans) cout<<x<<" ";
     return ans;
 }
 
