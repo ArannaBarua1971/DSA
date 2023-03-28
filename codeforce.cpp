@@ -1,100 +1,79 @@
 #include <bits/stdc++.h>
-#include<limits.h>
+#include<unordered_map>
+#include<math.h>
 using namespace std;
 
-class graph
-{
-public:
-    unordered_map<int, list<pair<int, int>>> adj;
+void solve(){
+    double n;
+    cin>>n;
 
-    void makeAdj(int u, int v, int m)
-    {
-        adj[u].push_back({v, m});
-    }
-    void printEdge(int n)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            cout << i << "-> ";
-            for (auto j : adj[i])
-            {
-                cout << "(" << j.first << "," << j.second << ") ";
-            }
-            cout << endl;
-        }
-    }
-    void dfs(int node, unordered_map<int, bool> &visited, stack<int> &st)
-    {
-        visited[node] = true;
+    vector<int> v1,v2;
+    vector<pair<int,int>> p;
+    int max1=0, max2=0,id1=0,id2=0;
 
-        for (auto x : adj[node])
-        {
-            if (!visited[x.first])
-            {
-                dfs(x.first, visited, st);
-            }
+    for(int i=0;i<n;i++){
+        int x;cin>>x;
+        if(max1<x){
+             max1=x;
+             id1=i;
         }
-        st.push(node);
+        v1.push_back(x);
+    }
+    for(int i=0;i<n;i++){
+        int x;cin>>x;
+        if(max2<x) {
+            max2=x;
+            id2=i;
+        }
+        v2.push_back(x);
+    }
+
+    if(max1>v1[n-1] && max2>v2[n-1]){
+        cout<<"No"<<endl;
         return;
     }
-
-    void topo(int n, stack<int> &st, unordered_map<int, bool> &visited)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            if (!visited[i])
-            {
-                dfs(i, visited, st);
+    else if(max1>v1[n-1]){
+        if(max1>v2[n-1]){
+            cout<<"No"<<endl;
+            return;
+        }
+        if(v2[id1]>v1[n-1]){
+            cout<<"No"<<endl;
+            return;
+        }
+        if(max1<max2) max1=max2;
+        for(int i=0;i<n;i++){
+            if(v1[i]==max1 && v2[i]==max1){
+                    cout<<"No"<<endl;
+                    return;
             }
         }
-    }
-
-    void dist(int start, stack<int> &st, vector<int> &dis)
-    {
-        dis[start] = 0;
-        while (!st.empty())
-        {
-            int top = st.top();
-            st.pop();
-            if (dis[top] != INT_MAX)
-            {
-                for(auto i:adj[top]){
-                    if((dis[top]+i.second) < dis[i.first]){
-                        dis[i.first]=dis[top]+i.second;
-                    }
-                }
+    }  
+    else if(max2>v2[n-1]){
+        if(max2>v1[n-1]){
+            cout<<"No"<<endl;
+            return;
+        }
+        if(v1[id2]>v2[n-1]){
+            cout<<"No"<<endl;
+            return;
+        }
+        if(max1<max2) max1=max2;
+        for(int i=0;i<n;i++){
+            if(v1[i]==max1 && v2[i]==max1){
+                    cout<<"No"<<endl;
+                    return;
             }
         }
-    }
-};
-
+    } 
+    cout<<"Yes"<<endl;
+    return;
+}
 int main()
 {
-    graph g;
+    int t;cin>>t;
 
-    g.makeAdj(0, 1, 5);
-    g.makeAdj(0, 2, 3);
-    g.makeAdj(1, 2, 2);
-    g.makeAdj(1, 3, 6);
-    g.makeAdj(2, 3, 7);
-    g.makeAdj(2, 4, 4);
-    g.makeAdj(2, 5, 2);
-    g.makeAdj(3, 4, -1);
-    g.makeAdj(4, 5, -2);
-
-    g.printEdge(6);
-
-    stack<int> st;
-    unordered_map<int, bool> visited;
-    vector<int> dis(6);
-    int start = 1;
-
-    for (int i = 0; i < 6; i++)
-    {
-        dis[i] = INT_MAX;
+    while(t--){
+        solve();
     }
-
-    g.topo(6, st, visited);
-    g.dist(start, st, dis);
-    for(auto x:dis) cout<<x<<" ";
 }
