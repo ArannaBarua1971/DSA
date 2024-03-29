@@ -1,37 +1,62 @@
-// Online C++ compiler to run C++ program online
+
 #include <bits/stdc++.h>
 using namespace std;
 
-void solve(int n, vector<int> num){
-    int value=num[num.size()-1];
-    
-    for(int i=0;i<n;i++){
-        while(num[i]<value){
-            num[i]=num[i]+num[i]%10;
+#define ll long long
+
+int maximumLengthSubstring(string s) {
+        unordered_map<int,int> helper;
+        queue<int> temp;
+        int maxValue=0;
+        
+        for(auto ch : s){
+            helper[ch]++;
+            temp.push(ch);
+            
+            if(helper[ch]>2){
+                maxValue=temp.size()-1;
+                while(true){
+                    
+                    char ele=temp.front();
+                    helper[ele]--;
+                    temp.pop(); 
+                    
+                    if(ch==ele){
+                        break;
+                    }
+                }
+                int size=temp.size();
+                maxValue=max(maxValue,size);
+            }
         }
-        value=max(num[i],value);
+        
+        return maxValue;
     }
-    for(int i=0;i<n;i++){
-        if(value!=num[i]){ cout<<"No"<<endl;break;}
+void solve(int a, int b, int c)
+{
+    if (a < b && b < c)
+    {
+        cout << "STAIR" << endl;
     }
-    cout<<"Yes"<<endl;
+    else if (a < b && b > c)
+    {
+        cout << "PEAK" << endl;
+    }
+    else
+    {
+        cout << "NONE" << endl;
+    }
 }
 
-int main() {
+int main()
+{
     int t;
-    cin>>t;
-    
-    while(t--){
-        int n;
-        vector<int> num;
-        cin>>n;
-        for(int i=0;i<n;i++){
-            int temp;
-            cin>>temp;
-            num.push_back(temp);
-        }
-        solve(n,num);
-    }
+    cin >> t;
 
-    return 0;
+    while (t--)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        solve(a, b, c);
+    }
 }
